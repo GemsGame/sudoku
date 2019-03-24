@@ -1,9 +1,49 @@
 module.exports = function solveSudoku(matrix) {
- 
-return sudoku(matrix);
+    return sudoku(matrix);
+      
 };
 
-
+const sudoku = (table) => {
+    const arr = [[],[],[],[],[],[],[],[],[]];
+    
+    for (i=0;i<9;i++) { 
+        for(z=0;z< 9;z++) {
+            table[i][z] === 0? arr[i].push(Math.floor(Math.random() * (9 - 1 + 1)) + 1): arr[i].push(table[i][z]);
+        }
+    
+    }
+    const ckeker =  chec(arr);
+    if(ckeker == true) {
+        console.log(true);
+        return arr;
+       
+    } else {
+    
+        return sudoku(table);
+        //console.log(arr);
+    }
+    
+    
+    
+    }
+    var chec = function() {
+        for (var g = [], b = [], c = [], d = [], e = [], h = [], f = [], a = 0; 81 > a; a++) {
+          a % 9 || (b = [], h.push(b)), b.push(a), 9 > a ? f.push([a]) : f[a % 9].push(a), a % 3 || a % 27 || (c = [], d = [], e = [], g.push(c, d, e)), [c, d, e][a % 9 / 3 | 0].push(a);
+        }
+        var k = [].concat(g, h, f);
+        return function(a) {
+          a = [].concat.apply([], a);
+        //console.log(a);
+          return k.every(function(b) {
+            var c = {};
+            return b.every(function(b) {
+              b = a[b];
+              c[b] = (c[b] || 0) + 1;
+              return 2 > c[b];
+            });
+          });
+        };
+      }();
 /*
 const table =  [
     [5, 3, 4, 6, 7, 8, 9, 0, 2],
@@ -18,47 +58,7 @@ const table =  [
   ];
 
 */
-const sudoku = (table) => {
-const arr = [[],[],[],[],[],[],[],[],[]];
 
-for (i=0;i<9;i++) { 
-    for(z=0;z< 9;z++) {
-        table[i][z] === 0? arr[i].push(Math.floor(Math.random() * (9 - 1 + 1)) + 1): arr[i].push(table[i][z]);
-    }
-
-}
-const ckeker =  chec(arr);
-if(ckeker == true) {
-    console.log(true);
-    return arr;
-   
-} else {
-  
-    sudoku(table);
-    //console.log(arr);
-}
-
-
-
-}
-var chec = function() {
-    for (var g = [], b = [], c = [], d = [], e = [], h = [], f = [], a = 0; 81 > a; a++) {
-      a % 9 || (b = [], h.push(b)), b.push(a), 9 > a ? f.push([a]) : f[a % 9].push(a), a % 3 || a % 27 || (c = [], d = [], e = [], g.push(c, d, e)), [c, d, e][a % 9 / 3 | 0].push(a);
-    }
-    var k = [].concat(g, h, f);
-    return function(a) {
-      a = [].concat.apply([], a);
-    //console.log(a);
-      return k.every(function(b) {
-        var c = {};
-        return b.every(function(b) {
-          b = a[b];
-          c[b] = (c[b] || 0) + 1;
-          return 2 > c[b];
-        });
-      });
-    };
-  }();
 
 
 
