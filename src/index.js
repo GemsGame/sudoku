@@ -29,12 +29,13 @@ for (i=0;i<9;i++) {
 }
 const ckeker =  chec(arr);
 if(ckeker == true) {
-   
-    return ckeker;
+    console.log(true);
+    return arr;
    
 } else {
-    //console.log ("FALSE");
+  
     sudoku(table);
+    //console.log(arr);
 }
 
 
